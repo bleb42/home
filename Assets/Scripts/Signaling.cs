@@ -21,15 +21,28 @@ public class Signaling : MonoBehaviour
         {
             _audioSource.volume = Mathf.MoveTowards(_audioSource.volume, 1, _changingVolumeSpeed * Time.deltaTime);
         }
+        else
+        {
+            _audioSource.volume =
+                Mathf.MoveTowards(_audioSource.volume, 0, _changingVolumeSpeed * Time.deltaTime);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.GetComponent<ThiefController>())
         {
-            _audioSource.enabled= true;
+            _audioSource.enabled = true;
             _isThiefInside = true;
             _audioSource.Play();
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.GetComponent<ThiefController>())
+        {
+            _isThiefInside = false;
         }
     }
 }
