@@ -19,12 +19,12 @@ public class Signaling : MonoBehaviour
     {
         if (_isThiefInside == true)
         {
-            _audioSource.volume = Mathf.MoveTowards(_audioSource.volume, 1, _changingVolumeSpeed * Time.deltaTime);
+            _audioSource.volume = Mathf.MoveTowards(_audioSource.volume, 1, 1 / _changingVolumeSpeed * Time.deltaTime);
         }
         else
         {
             _audioSource.volume =
-                Mathf.MoveTowards(_audioSource.volume, 0, _changingVolumeSpeed * Time.deltaTime);
+                Mathf.MoveTowards(_audioSource.volume, 0, 1 / _changingVolumeSpeed * Time.deltaTime);
         }
     }
 
