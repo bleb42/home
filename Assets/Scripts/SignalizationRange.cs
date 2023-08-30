@@ -9,17 +9,17 @@ public class SignalizationRange : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent<ThiefController>(out ThiefController thief))
+        if (other.TryGetComponent<Thief>(out Thief thief))
         {
-            StartCoroutine(_signalization.StartSignal());
+            StartCoroutine(_signalization.SetSignalVolume(1));
         }
     }
     
     private void OnTriggerExit(Collider other)
     {
-        if (other.TryGetComponent<ThiefController>(out ThiefController thief))
+        if (other.TryGetComponent<Thief>(out Thief thief))
         {
-            StartCoroutine(_signalization.EndSignal());
+            StartCoroutine(_signalization.SetSignalVolume(0));
         }
     }
 }

@@ -14,27 +14,15 @@ public class Signalization : MonoBehaviour
         _audioSource = GetComponent<AudioSource>();
     }
 
-    public IEnumerator StartSignal()
+    public IEnumerator SetSignalVolume(float volume)
     {
-        while (_audioSource.volume < 1)
+        while (_audioSource.volume != volume)
         {
-            _audioSource.volume = Mathf.MoveTowards(_audioSource.volume, 1, _changeVolumeSpeed * Time.deltaTime);
+            _audioSource.volume = Mathf.MoveTowards(_audioSource.volume, volume, _changeVolumeSpeed * Time.deltaTime);
         
             yield return new WaitForEndOfFrame();
         }
 
-        StopCoroutine(StartSignal());
-    }
-
-    public IEnumerator EndSignal()
-    {
-        while (_audioSource.volume > 0)
-        {
-            _audioSource.volume = Mathf.MoveTowards(_audioSource.volume, 0, _changeVolumeSpeed * Time.deltaTime);
-
-            yield return new WaitForEndOfFrame();
-        }
-
-        StopCoroutine(EndSignal());
+        StopCoroutine(SetSignalVolume(volume));
     }
 }
